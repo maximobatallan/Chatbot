@@ -1,0 +1,27 @@
+<!-- myapp/templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Página</title>
+</head>
+<body>
+    <h1>Respuesta del Webhook de WhatsApp</h1>
+    <div id="respuesta-whatsapp">Cargando...</div>
+
+    <script>
+        // Hacer una solicitud AJAX a la función webhook_whatsapp
+        fetch("{% url 'webhook_whatsapp' %}")
+            .then(response => response.json())
+            .then(data => {
+                // Manejar la respuesta del servidor
+                document.getElementById("respuesta-whatsapp").textContent = data.message;
+            })
+            .catch(error => {
+                // Manejar errores si ocurren
+                console.error("Error en la solicitud AJAX:", error);
+            });
+    </script>
+</body>
+</html>
